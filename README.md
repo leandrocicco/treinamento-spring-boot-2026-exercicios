@@ -2,7 +2,7 @@
 
 ## Exercício 1
 
-**Executar dentro do diretório exercicio1:**: 
+**Executar dentro do diretório exercicio1**: 
 
 ```bash
 mvn clean install
