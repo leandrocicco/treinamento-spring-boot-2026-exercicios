@@ -1,0 +1,26 @@
+[ {
+  "nome" : "Yara Guarani",
+  "idade" : 21,
+  "cpf" : "54291827305",
+  "curso" : "Ciências Biológicas"
+}, {
+  "nome" : "Enzo Valentim de Arcanjo",
+  "idade" : 30,
+  "cpf" : "81274390512",
+  "curso" : "Astronomia"
+}, {
+  "nome" : "Dagoberto Peixoto",
+  "idade" : 55,
+  "cpf" : "29304156788",
+  "curso" : "História"
+}, {
+  "nome" : "Ximena Luzia das Neves",
+  "idade" : 24,
+  "cpf" : "60412398744",
+  "curso" : "Design de Moda"
+}, {
+  "nome" : "Ubirajara Pires",
+  "idade" : 42,
+  "cpf" : "15928374600",
+  "curso" : "Agronomia"
+} ]
