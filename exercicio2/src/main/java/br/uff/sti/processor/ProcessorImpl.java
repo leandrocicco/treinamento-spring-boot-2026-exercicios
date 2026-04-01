@@ -1,7 +1,6 @@
-package br.uff.sti.process;
+package br.uff.sti.processor;
 
-import br.uff.sti.interfaces.Processable;
-import br.uff.sti.interfaces.Processor;
+import br.uff.sti.annotations.Loga;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,11 +13,13 @@ import org.springframework.stereotype.Component;
  *
  * @author leandroribeirodecicco
  */
-@Component("processor")
+@Component
 public class ProcessorImpl implements Processor {
 
     private static final Logger logger = LoggerFactory.getLogger(ProcessorImpl.class);    
 
+    @Loga
+    @Override
     public List<Map<String, String>> processList(List<Map<String, Object>> list, Processable processable) {
         List<Map<String, String>> newList = new ArrayList<>();
         for (Map<String, Object> map : list) {

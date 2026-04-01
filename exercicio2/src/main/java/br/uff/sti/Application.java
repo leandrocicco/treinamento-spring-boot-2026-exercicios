@@ -1,75 +1,64 @@
 package br.uff.sti;
 
-import br.uff.sti.interfaces.Processor;
-import br.uff.sti.interfaces.Reader;
-import br.uff.sti.interfaces.Writer;
+import br.uff.sti.destination.Destination;
+import br.uff.sti.origin.Origin;
+import br.uff.sti.processor.Processor;
+import br.uff.sti.reader.Reader;
+import br.uff.sti.writer.Writer;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
-    
+
     public static void main(String[] args) {
         logger.info("Iniciando aplicação Spring-Boot");
-        try(var context = SpringApplication.run(Application.class, args)){
-            
+        try ( var context = SpringApplication.run(Application.class, args)) {
+
         }
         logger.info("Finalizando aplicação Spring-Boot");
-    }   
-    
+    }
+
     @Autowired
-    public Reader jsonReader;
+    public Reader reader;
 
     @Autowired
     public Processor processor;
-    
+
     @Autowired
-    public Writer csvWriter;
+    public Writer infoWriter;
 
-    @Override
-    public void run(String... args) throws Exception {
-        
-        System.out.println("CommandLineRunner executed with arguments:");
-        for (String arg : args) {
-            System.out.println(arg);
-        }
+    @Bean
+    public CommandLineRunner execute(Origin mainOrigin, Destination mainDestination) {
+        return (args) -> {            
 
+            List<Map<String, Object>> list = reader.read(mainOrigin);
 
-        List<Map<String, Object>> list = jsonReader.read();
-
-        var newList = processor.processList(
-                list,
-                (Object obj) -> {
-                    if(obj == null){
-                        return "";
+            var newList = processor.processList(
+                    list,
+                    (Object obj) -> {
+                        if (obj == null) {
+                            return "";
+                        } else if (obj instanceof String string) {
+                            return string.toUpperCase();
+                        } else {
+                            return obj.toString();
+                        }
                     }
-                    else if (obj instanceof String string) {
-                        return string.toUpperCase();
-                    }
-                    else {
-                        return obj.toString();
-                    }                    
-                }
-        );
+            );
 
-        for (Map<String, String> map : newList) {
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                System.out.println(entry.getKey() + "=" + entry.getValue());
-            }
-        }
-        
-        csvWriter.write(newList);
-        
-    }       
+            infoWriter.write(newList, mainDestination, true);
+
+        };
+    }
 
 }

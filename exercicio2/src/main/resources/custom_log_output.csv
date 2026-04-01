@@ -1,0 +1,12 @@
+JSONReader.read(..),class br.uff.sti.reader.json.JSONReader,01/04/2026 05:06:08
+ProcessorImpl.processList(..),class br.uff.sti.process.ProcessorImpl,01/04/2026 05:06:08
+CSVInfoWriter.write(..),class br.uff.sti.writer.csv.CSVInfoWriter,01/04/2026 05:06:08
+JSONReader.read(..),class br.uff.sti.reader.json.JSONReader,01/04/2026 05:15:22
+ProcessorImpl.processList(..),class br.uff.sti.processor.ProcessorImpl,01/04/2026 05:15:22
+CSVInfoWriter.write(..),class br.uff.sti.writer.csv.CSVInfoWriter,01/04/2026 05:15:22
+JSONReader.read(..),class br.uff.sti.reader.json.JSONReader,01/04/2026 05:24:31
+ProcessorImpl.processList(..),class br.uff.sti.processor.ProcessorImpl,01/04/2026 05:24:31
+CSVInfoWriter.write(..),class br.uff.sti.writer.csv.CSVInfoWriter,01/04/2026 05:24:31
+JSONReader.read(..),class br.uff.sti.reader.json.JSONReader,01/04/2026 05:25:05
+ProcessorImpl.processList(..),class br.uff.sti.processor.ProcessorImpl,01/04/2026 05:25:05
+CSVInfoWriter.write(..),class br.uff.sti.writer.csv.CSVInfoWriter,01/04/2026 05:25:05

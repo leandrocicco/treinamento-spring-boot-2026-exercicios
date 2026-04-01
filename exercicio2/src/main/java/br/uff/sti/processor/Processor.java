@@ -1,4 +1,4 @@
-package br.uff.sti.interfaces;
+package br.uff.sti.processor;
 
 import java.util.List;
 import java.util.Map;

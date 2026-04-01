@@ -1,5 +1,5 @@
 
-package br.uff.sti.interfaces;
+package br.uff.sti.processor;
 
 /**
  *
