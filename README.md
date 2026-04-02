@@ -25,4 +25,5 @@ Obs:
 Pasta docs:
 * Diagrama de Classe: Diagrama de Classe ETL.png
 * Arquivo Astah: astah_class_diagram.asta
-* Diagrama de dependência de Beans: beans.png 
+* Diagrama de dependência de Beans: beans.png
+* Resposta do item 5) do exercício: item5.pdf 
