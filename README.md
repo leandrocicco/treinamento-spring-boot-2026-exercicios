@@ -19,3 +19,10 @@ mvn spring-boot:run
 ```
 
 Obs1: arquivo custom_input.json em src/main/resources
+Obs2: saida csv do json em custom_output.csv em src/main/resources
+Obs3: saída csv do log em custom_log_output.csv em src/main/resources
+
+Pasta docs:
+* Diagrama de Classe: Diagrama de Classe ETL.png
+* Arquivo Astah: astah_class_diagram.asta
+* Diagrama de dependência de Beans: beans.png 
