@@ -17,10 +17,10 @@ mvn exec:java -Dexec.mainClass=br.uff.sti.App -Dexec.args="input.csv"
 mvn clean install
 mvn spring-boot:run
 ```
-
-Obs1: arquivo custom_input.json em src/main/resources
-Obs2: saida csv do json em custom_output.csv em src/main/resources
-Obs3: saída csv do log em custom_log_output.csv em src/main/resources
+Obs:
+* 1- arquivo custom_input.json em src/main/resources
+* 2- saida csv do json em custom_output.csv em src/main/resources
+* 3- saída csv do log em custom_log_output.csv em src/main/resources
 
 Pasta docs:
 * Diagrama de Classe: Diagrama de Classe ETL.png
