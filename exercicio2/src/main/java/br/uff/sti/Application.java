@@ -56,7 +56,7 @@ public class Application {
                     }
             );
 
-            infoWriter.write(newList, mainDestination, true);
+            infoWriter.write(newList, mainDestination);
 
         };
     }

@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public interface Writer {
     
-    public void write(List<Map<String, String>> list, Destination destination, boolean writeHeader);
+    public void write(List<Map<String, String>> list, Destination destination);
     
+    public void log(List<String> list, Destination destination);    
 }

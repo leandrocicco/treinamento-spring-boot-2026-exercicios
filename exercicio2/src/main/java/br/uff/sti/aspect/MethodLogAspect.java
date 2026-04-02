@@ -3,36 +3,42 @@ package br.uff.sti.aspect;
 import br.uff.sti.destination.Destination;
 import br.uff.sti.writer.Writer;
 import br.uff.sti.util.Utils;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import jakarta.annotation.PostConstruct;
+import java.util.Arrays;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class MethodLogAspect {
     
+    private static final Logger logger = LoggerFactory.getLogger(MethodLogAspect.class);
+    
     private final Destination logDestination;
     
-    private final Writer writer;
+    private final Writer logWriter;
 
     public MethodLogAspect(Destination logDestination, Writer logWriter) {
         this.logDestination = logDestination;
-        this.writer = logWriter;
+        this.logWriter = logWriter;
     }       
-
+    
+    @PostConstruct
+    private void postConstruct() {
+        this.logWriter.log(Arrays.asList("Method_Signature", "Method_Class", "DateTime"), 
+                this.logDestination);
+    }
+    
     @After("@annotation(br.uff.sti.annotations.Loga)")
-    public void mehtodLog(JoinPoint joinPoint) throws Throwable {        
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("Method_Signature", joinPoint.getSignature().toShortString());
-        map.put("Method_Class", joinPoint.getTarget().getClass().toString());
-        map.put("DataHora", Utils.getDataHoraAtualFormatada());
-        List<Map<String,String>> list = new ArrayList<>();
-        list.add(map);       
-        this.writer.write(list, this.logDestination, false);
+    public void mehtodLog(JoinPoint joinPoint) throws Throwable {    
+        logger.debug("aspecto chamado: " + joinPoint.getSignature());        
+        this.logWriter.log(Arrays.asList(joinPoint.getSignature().toShortString(), 
+                            joinPoint.getTarget().getClass().toString(), 
+                            Utils.getDataHoraAtualFormatada()),
+                this.logDestination);
     }
 }
