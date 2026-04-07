@@ -17,3 +17,8 @@ buildNumber.properties
 .classpath
 nbactions.xml
 .DS_Store
+
+exercicio2/src/main/resources/custom_output.csv
+exercicio2/src/main/resources/custom_log_output.csv
+
+storage/
