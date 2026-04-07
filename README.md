@@ -51,8 +51,8 @@ Para utilizar uma IDE de banco utilize a conexão de banco:
 ```bash
 jdbc:hsqldb:hsql://localhost:9001/mydb-exercicios
 ```
-username: sa
-senha: (vazio)
+* username: sa
+* senha: (vazio)
 
 Executar a aplicação:
 
@@ -65,8 +65,9 @@ O que será impresso:
 
 Cada item do exercício será impresso com o formato:
 
+```bash
 =========================================================
 | Item: #
 =========================================================
-
+```
 Onde # corresponde ao respectivo Item 
