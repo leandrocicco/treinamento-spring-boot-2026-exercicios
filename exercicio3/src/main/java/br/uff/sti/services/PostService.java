@@ -2,6 +2,7 @@ package br.uff.sti.services;
 
 import br.uff.sti.models.Post;
 import br.uff.sti.models.Usuario;
+import br.uff.sti.models.dto.PostComUsuarioDTO;
 import br.uff.sti.repositories.PostRepository;
 import jakarta.validation.ConstraintViolation;
 import lombok.AllArgsConstructor;
@@ -57,6 +58,14 @@ public class PostService {
     
     public List<Post> getAllByMensagemContainingCaseInsensitive(String word){
         return postRepository.findByMensagemContainingIgnoreCaseOrderByDataPostagemDesc(word);
+    }
+    
+    public List<PostComUsuarioDTO> getAllWithUsuario(){
+        return postRepository.findAllWithUsuario();
+    }
+    
+    public List<PostComUsuarioDTO> getWithUsuarioByUsuario(Usuario usuario){
+        return postRepository.findWtihUsuarioByUsuarioId(usuario.id());
     }
     
     @Transactional(readOnly = true)

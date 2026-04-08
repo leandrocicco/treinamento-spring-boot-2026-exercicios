@@ -5,7 +5,6 @@ import br.uff.sti.models.Usuario;
 import br.uff.sti.services.PostService;
 import br.uff.sti.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(3)
-public class Item2 implements CommandLineRunner {
+public class Item2 extends BaseRunner {
     
     @Autowired
     UsuarioService usuarioService;
@@ -26,13 +25,7 @@ public class Item2 implements CommandLineRunner {
     @Override
     public void run(String... args) {
         
-        String item = """
-        =========================================================
-        | Item: %s        
-        =========================================================
-        """.formatted(2);
-        
-        System.out.println(item);
+        printItemLabel("2");
         
         Usuario usuario = usuarioService.getLastInserted();
         System.out.println(usuario);

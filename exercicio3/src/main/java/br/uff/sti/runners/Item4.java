@@ -3,7 +3,6 @@ package br.uff.sti.runners;
 import br.uff.sti.models.Post;
 import br.uff.sti.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(5)
-public class Item4 implements CommandLineRunner {
+public class Item4 extends BaseRunner {
     
     @Autowired
     PostService postService;
@@ -21,13 +20,7 @@ public class Item4 implements CommandLineRunner {
     @Override
     public void run(String... args) {        
         
-        String item = """
-        =========================================================
-        | Item: %s        
-        =========================================================
-        """.formatted(4);
-        
-        System.out.println(item);
+        printItemLabel("4");
         
         for (Post post: postService.getAllByMensagemContainingCaseInsensitive("orc")) {            
             System.out.println(post);

@@ -57,8 +57,8 @@ jdbc:hsqldb:hsql://localhost:9001/mydb-exercicios
 Executar a aplicação:
 
 ```bash
-mvn clean install
-mvn spring-boot:run
+mvn clean install   # -DskipTests #se qusiser não executar os testes
+mvn spring-boot:run # -DskipTests #se qusiser não executar os testes
 ```
 
 O que será impresso:
@@ -71,3 +71,10 @@ Cada item do exercício será impresso com o formato:
 =========================================================
 ```
 Onde # corresponde ao respectivo Item 
+
+Obs:
+* 1- arquivo schema.sql em src/main/resources
+* 2- application.properties com debug e show_sql = true
+
+Pasta docs:
+* Resposta do Item 6) do exercício: item6.pdf 

@@ -3,7 +3,6 @@ package br.uff.sti.runners;
 import br.uff.sti.services.PostService;
 import br.uff.sti.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(1)
-public class CleanBase implements CommandLineRunner {
+public class CleanBase extends BaseRunner {
     
     @Autowired
     PostService postService;
@@ -24,9 +23,10 @@ public class CleanBase implements CommandLineRunner {
     
     @Override
     public void run(String... args) {
+        
+        printItemLabel("Limpando a base de dados...");
+        
         postService.deleteAll();
         usuarioService.deleteAll();
-        
-        System.out.println("\n\nLimpando a base de dados...\n\n");
     }
 }

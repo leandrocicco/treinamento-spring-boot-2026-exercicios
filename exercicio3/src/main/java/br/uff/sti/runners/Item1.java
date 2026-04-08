@@ -5,7 +5,6 @@ import br.uff.sti.models.Usuario;
 import br.uff.sti.services.PostService;
 import br.uff.sti.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Order(2)
-public class Item1 implements CommandLineRunner {
+public class Item1 extends BaseRunner {
     
     public static final int QTD_USUARIOS = 5;
     public static final int QTD_POST_POR_USUARIO = 6;
@@ -30,13 +29,7 @@ public class Item1 implements CommandLineRunner {
     @Override
     public void run(String... args) {
         
-        String item = """
-        =========================================================
-        | Item: %s        
-        =========================================================
-        """.formatted(1);
-        
-        System.out.println(item);
+        printItemLabel("1");
         
         for(int i = 0; i < QTD_USUARIOS; i++) {            
             Usuario usuario = usuarioService.save(Usuario.fake());
