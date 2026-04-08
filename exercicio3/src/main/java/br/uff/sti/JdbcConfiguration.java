@@ -1,6 +1,5 @@
 package br.uff.sti;
 
-import lombok.val;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jdbc.core.convert.JdbcCustomConversions;
 import org.springframework.data.jdbc.core.mapping.JdbcMappingContext;
@@ -31,8 +30,9 @@ public class JdbcConfiguration extends AbstractJdbcConfiguration {
     public JdbcMappingContext jdbcMappingContext(Optional<NamingStrategy> namingStrategy,
                                                  JdbcCustomConversions customConversions,
                                                  RelationalManagedTypes jdbcManagedTypes) {
-        val mapping= super.jdbcMappingContext(namingStrategy, customConversions, jdbcManagedTypes);
+        JdbcMappingContext mapping= super.jdbcMappingContext(namingStrategy, customConversions, jdbcManagedTypes);
         mapping.setForceQuote(false);
+        mapping.setSingleQueryLoadingEnabled(true);
         return mapping;
     }
 

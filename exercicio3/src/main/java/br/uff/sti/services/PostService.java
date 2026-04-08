@@ -14,6 +14,7 @@ import jakarta.validation.Validator;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  *
@@ -56,6 +57,11 @@ public class PostService {
     
     public List<Post> getAllByMensagemContainingCaseInsensitive(String word){
         return postRepository.findByMensagemContainingIgnoreCaseOrderByDataPostagemDesc(word);
+    }
+    
+    @Transactional(readOnly = true)
+    public Stream<Post> getLastFifteenPosts(){
+        return postRepository.findTop15ByOrderByDataPostagemDesc();        
     }
     
     @Transactional

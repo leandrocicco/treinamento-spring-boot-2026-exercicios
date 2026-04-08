@@ -1,45 +1,41 @@
 package br.uff.sti.runners;
 
 import br.uff.sti.models.Post;
-import br.uff.sti.models.Usuario;
 import br.uff.sti.services.PostService;
-import br.uff.sti.services.UsuarioService;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author leandroribeirodecicco
  */
 @Component
-@Order(3)
-public class Item2 implements CommandLineRunner {
-    
-    @Autowired
-    UsuarioService usuarioService;
+@Order(6)
+public class Item5 implements CommandLineRunner {
     
     @Autowired
     PostService postService;
     
     @Override
-    public void run(String... args) {
+    public void run(String... args) {        
         
         String item = """
         =========================================================
         | Item: %s        
         =========================================================
-        """.formatted(2);
+        """.formatted(5);
         
         System.out.println(item);
-        
-        Usuario usuario = usuarioService.getLastInserted();
-        System.out.println(usuario);
-        for (Post post: postService.getLastFivePostsFromUser(usuario)) {            
-            System.out.println(post);
+    
+        try (Stream<Post> postStream = postService.getLastFifteenPosts()) {
+            postStream.forEach(post -> {
+                System.out.println(post);
+            }); 
         }
-        
     }
     
 }
