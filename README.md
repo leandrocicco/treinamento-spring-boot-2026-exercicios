@@ -21,6 +21,7 @@ Obs:
 * 1- arquivo custom_input.json em src/main/resources
 * 2- saida csv do json em custom_output.csv em src/main/resources
 * 3- saída csv do log em custom_log_output.csv em src/main/resources
+* 4- não utilizada uma classe ou record para mapear os dados do Json, foi utilizado um Map, para que a quantidade de atributos do Json pudesse ser dinâmica sem precisar alterar o código. Foi acrescentado um campo novo Telefone ao Json dado de exemplo.
 
 Pasta docs:
 * Diagrama de Classe: Diagrama de Classe ETL.png
