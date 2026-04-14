@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Configuration
-@EnableJdbcRepositories(basePackageClasses = {Ap4Application.class})
+@EnableJdbcRepositories(basePackageClasses = {Application.class})
 public class JdbcConfiguration extends AbstractJdbcConfiguration {
 
     /**
