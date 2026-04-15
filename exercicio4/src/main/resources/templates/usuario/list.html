@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Post App</title>
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    </head>
+    <body>
+        <section class="container">
+            <table class="table">
+                
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>
+                        -
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each=" usuario: ${usuarios.content}">
+                    <td th:text="|#${usuario.id}|">#1</td>
+                    <td th:text="|#${usuario.username}|">fulano.silva</td>
+                    <td th:text="|#${usuario.nome}|">Fulano</td>                    
+                    <td th:text="|#${usuario.idade}|">34</td>                    
+                    <td>
+                        <a class="btn btn-primary"
+                            th:href="@{/usuario/{id}(id=${usuario.id})}">
+                            Visualizar
+                        </a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            
+            <nav>
+                <ul class="pagination">
+                    <!-- Previous Page Link -->
+                    <li class="page-item" th:classappend="${!usuarios.hasPrevious()} ? 'disabled'">
+                        <a class="page-link" th:href="@{/usuario(page=${usuarios.number - 1})}">Previous</a>
+                    </li>
+
+                    <!-- Page Number Links -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, usuarios.totalPages - 1)}"
+                        th:classappend="${i == usuarios.number} ? 'active'">
+                        <a class="page-link" th:href="@{/usuario(page=${i})}" th:text="${i + 1}">1</a>
+                    </li>
+
+                    <!-- Next Page Link -->
+                    <li class="page-item" th:classappend="${!usuarios.hasNext()} ? 'disabled'">
+                        <a class="page-link" th:href="@{/usuario(page=${usuarios.number + 1})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            
+        </section>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

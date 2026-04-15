@@ -22,7 +22,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each=" post: ${posts}">
+                <tr th:each=" post: ${posts.content}">
                     <td th:text="|#${post.id}|">#1</td>
                     <td th:text="|#${post.mensagem}|">mensagem XPTO</td>
                     <td th:text="${#temporals.format(post.dataPostagem, 'dd/MM/yyyy HH:mm:ss')}">10/10/10234</td>
@@ -36,6 +36,26 @@
 
                 </tbody>
             </table>
+            
+            <nav>
+                <ul class="pagination">
+                    <!-- Previous Page Link -->
+                    <li class="page-item" th:classappend="${!posts.hasPrevious()} ? 'disabled'">
+                        <a class="page-link" th:href="@{/post(page=${posts.number - 1})}">Previous</a>
+                    </li>
+
+                    <!-- Page Number Links -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, posts.totalPages - 1)}"
+                        th:classappend="${i == posts.number} ? 'active'">
+                        <a class="page-link" th:href="@{/post(page=${i})}" th:text="${i + 1}">1</a>
+                    </li>
+
+                    <!-- Next Page Link -->
+                    <li class="page-item" th:classappend="${!posts.hasNext()} ? 'disabled'">
+                        <a class="page-link" th:href="@{/post(page=${posts.number + 1})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     </body>

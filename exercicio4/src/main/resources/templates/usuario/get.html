@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Post App</title>
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    </head>
+    <body>
+        <section class="container">
+
+            <h1 th:text="|Usuario #${usuario.id}|">Usuario #4</h1>
+            
+            <dl class="row">
+                <dt class="col-sm-3">Username</dt>
+                <dd class="col-sm-9" th:text="${usuario.username}"></dd>
+                <dt class="col-sm-3">Nome</dt>
+                <dd class="col-sm-9" th:text="${usuario.nome}"></dd>
+                <dt class="col-sm-3">Idade</dt>
+                <dd class="col-sm-9" th:text="${usuario.idade}"></dd>
+                <dt class="col-sm-3">Foto</dt>
+                <dd class="col-sm-9">
+                    <img th:src="${usuario.urlImagem}" alt="user iagem" class="img-thumbnail">    
+                </dd>
+            </dl>
+
+        </section>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

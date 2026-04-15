@@ -11,17 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Set;
+import org.springframework.data.web.PageableDefault;
 
 @Slf4j
 @Controller
-//@RequestMapping("/")
 @RequestMapping("post")
 @AllArgsConstructor
 public class PostController {
@@ -76,9 +73,9 @@ public class PostController {
 
 
     @GetMapping
-    public ModelAndView list(){
+    public ModelAndView list(@PageableDefault Pageable pageable){
         val mv = new ModelAndView("post/list");
-        mv.addObject("posts", postService.findAll(Pageable.unpaged()));
+        mv.addObject("posts", postService.findAll(pageable));
         return mv;
     }
 
