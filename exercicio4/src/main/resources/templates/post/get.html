@@ -28,6 +28,7 @@
                 <li class="list-group-item" th:each="tag: ${post.tags}" th:text="${tag.nome}">Ação</li>
             </ul>
 
+            <a class="btn btn-secondary"th:href="@{/post}">Voltar</a>
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     </body>

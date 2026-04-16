@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Post App</title>
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    </head>
+    <body>
+        <section class="container">
+
+            <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/post}">Posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/usuario}">Usuarios</a>
+            </li>            
+          </ul>
+            
+        </section>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

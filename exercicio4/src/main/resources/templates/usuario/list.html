@@ -61,12 +61,10 @@
                         <a class="page-link" th:href="@{/usuario(page=${usuarios.number + 1})}">Next</a>
                     </li>
                 </ul>
-            </nav>
+            </nav>            
             
-            <a class="btn btn-primary"
-                th:href="@{/usuario/new}">
-                Novo
-            </a>
+            <a class="btn btn-secondary" role="button" th:href="@{/}">Voltar</a>
+            <a class="btn btn-primary" role="button" th:href="@{/usuario/new}">Novo</a>
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     </body>
