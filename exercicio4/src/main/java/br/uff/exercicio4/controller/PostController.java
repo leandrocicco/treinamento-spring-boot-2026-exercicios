@@ -31,7 +31,7 @@ public class PostController {
     public ModelAndView get(@PathVariable Long id){
         val mv = new ModelAndView("post/get");
 
-        mv.addObject("post", postService.findObyComUsuarioById(id));
+        mv.addObject("post", postService.findbyComUsuarioById(id));
 
         return mv;
     }

@@ -37,7 +37,7 @@ public class PostService {
         if (!violations.isEmpty()) {
             throw new IllegalArgumentException("Objeto inválido: " + violations);
         }
-
+    
         return postRepository.save(post);
     }
 
@@ -53,7 +53,7 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public PostComUsuario findObyComUsuarioById(long id){
+    public PostComUsuario findbyComUsuarioById(long id){
         val post = findObjById(id);
 
         val usuario = usuarioRepository.findById(post.usuarioId()).orElseThrow();

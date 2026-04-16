@@ -1,7 +1,9 @@
 package br.uff.exercicio4.controller;
 
 
+import br.uff.exercicio4.modelo.Usuario;
 import br.uff.exercicio4.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import org.springframework.data.web.PageableDefault;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -37,5 +41,37 @@ public class UsuarioController {
         return mv;
     }
 
+    @GetMapping("new")
+    public ModelAndView novo(){
+        val mv = new ModelAndView("usuario/edit");
 
+        mv.addObject("usuario", new Usuario(null, null, null, 0, null));
+
+        return mv;
+    }
+
+    @GetMapping("{id}/edit")
+    public ModelAndView edit(@PathVariable Long id){
+        val mv = new ModelAndView("usuario/edit");
+
+        mv.addObject("usuario", usuarioService.findObjById(id));
+
+        return mv;
+    }
+    
+    @PostMapping
+    public String save(@Valid Usuario usuario, BindingResult result, RedirectAttributes redirectAttributes){
+        log.info("Olha o post a ser salvo: {}", usuario);
+                
+        if (result.hasErrors()){
+            return "usuario/edit";
+        }
+        
+        Usuario usuarioSalvo = usuarioService.save(usuario);
+        
+        redirectAttributes.addFlashAttribute("msgSuccess", "Usuário salvo com sucesso!");
+        
+        return "redirect:/usuario/"+usuarioSalvo.id();
+        
+    }
 }

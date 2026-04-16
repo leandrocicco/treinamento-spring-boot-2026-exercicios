@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap demo</title>
+        <title>Post App</title>
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     </head>
     <body>
@@ -12,9 +12,7 @@
 
             <form method="POST" action="#" th:action="@{/post}">
                 <h2 class="form-label">Mensagem</h2>
-                <textarea class="form-control" id="mensagem" name="mensagem" row="10" th:text="${post.mensagem}">
-
-            </textarea>
+                <textarea class="form-control" id="mensagem" name="mensagem" row="10" th:text="${post.mensagem}"></textarea>
 
                 <h2>Tags</h2>
                 <label class="form-label" for="tag[0]">Tag 1:</label>

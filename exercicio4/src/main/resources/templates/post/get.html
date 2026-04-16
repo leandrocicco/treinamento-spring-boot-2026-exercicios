@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap demo</title>
+        <title>Post App</title>
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     </head>
     <body>
@@ -23,6 +23,10 @@
             <p>Por <span th:text="${post.usuario.nome}"> João da Silva</span> em
                 <span th:text="${#temporals.format(post.dataPostagem, 'dd/MM/yyyy HH:mm:ss')}">10/01/2005 10:04:01</span>
             </p>
+                
+            <ul class="list-group">
+                <li class="list-group-item" th:each="tag: ${post.tags}" th:text="${tag.nome}">Ação</li>
+            </ul>
 
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
