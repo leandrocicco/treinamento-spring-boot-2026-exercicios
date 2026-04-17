@@ -9,36 +9,93 @@
     </head>
     <body>
         <section class="container">
+            
+            <h1 th:text="${postComUsuario.post.id} ? |Post #${postComUsuario.post.id}| : 'Novo Post'">Post #4</h1>
 
-            <form method="POST" action="#" th:action="@{/post}">
-                <h2 class="form-label">Mensagem</h2>
-                <textarea class="form-control" id="mensagem" name="mensagem" row="10" th:text="${post.mensagem}"></textarea>
+            <form method="POST" action="#" th:action="@{/post}" th:object="${postComUsuario}" >
+                
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors()}">
+                    <p th:if="${#fields.hasErrors('post.usuarioId')}">Usuario: <span th:errors="*{post.usuarioId}"></span></p>
+                    <p th:if="${#fields.hasErrors('post.mensagem')}">Mensagem: <span th:errors="*{post.mensagem}"></span></p>
+                    <p th:each="tag, itemStat : *{post.tags}" th:if="${#fields.hasErrors('post.tags[__${itemStat.index}__].nome')}">Tag: <span th:errors="*{post.tags[__${itemStat.index}__].nome}"></span></p>
+                </div>
+                
+                <input type="hidden" class="form-control" id="post_id" th:field="*{post.id}">
+                <input type="hidden" class="form-control" id="post_data_postagem" th:field="*{post.dataPostagem}">
+                
+                <div class="form-group">
+                    <label for="post_usuario_id">Usuario</label>
+                    <select class="form-control" id="post_usuario_id" th:field="*{post.usuarioId}">
+                        <option value="">Selecione um usuário</option>
+                        <option th:each="usuario : ${usuarios}"
+                                th:value="${usuario.id}"
+                                th:text="${usuario.nome}">
+                        </option>
+                    </select>
+                </div>
+                    
+                <div class="form-group">
+                    <label for="post_mensagem">Mensagem</label>
+                    <textarea class="form-control" id="post_mensagem" name="mensagem" rows="3" th:field="*{post.mensagem}"></textarea>
+                </div> 
+                
+                <div class="form-group"> 
+                    <h2>Tags</h2> 
+                    <button type="button" class="btn btn-success" onclick="addTag();">Nova Tag</button>
+                </div>
+                <br/>
+                <div id="tag-container">
+                    <div th:each="tag, itemStat : *{post.tags}" class="input-group mb-3 tag-row">
+                        <!--<label class="form-label" th:text="|Tag ${itemStat.index+1}:|" th:for="'post.tags' + ${itemStat.index} + '.nome'">Tag 1:</label>-->
+                        <input type="text" class="form-control"  aria-describedby="button-addon2" th:field="*{post.tags[__${itemStat.index}__].nome}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-danger" type="button" onclick="removeTag(this);" id="button-addon2">Remover</button>
+                        </div>
+                    </div>
+                </div>
 
-                <h2>Tags</h2>
-                <label class="form-label" for="tag[0]">Tag 1:</label>
-                <input class="form-control" type="text" id="tag[0]" name="tags[0].nome">
-                <label class="form-label" for="tag[1]">Tag 2:</label>
-                <input class="form-control" type="text" id="tag[1]" name="tags[1].nome">
-                <label class="form-label" for="tag[2]">Tag 3:</label>
-                <input class="form-control" type="text" id="tag[2]" name="tags[2].nome">
-                <label class="form-label" for="tag[3]">Tag 4:</label>
-                <input class="form-control" type="text" id="tag[3]" name="tags[3].nome">
+                <br/>    
+                
                 <input class="btn btn-primary" type="submit" value="Enviar">
             </form>
-            <!--    <pre th:text="${post.mensagem}">-->
-            <!--        Atirei o pau no gato to to-->
-            <!--        mas o gato to to-->
-            <!--        não morreu reu reu-->
-            <!--        dona chica ca ca-->
-            <!--        indignou-se se se-->
-            <!--    </pre>-->
-
-            <!--    <p>Por <span th:text="${post.usuario.nome}"> João da Silva</span> em-->
-            <!--        <span th:text="${#temporals.format(post.dataPostagem, 'dd/MM/yyyy HH:mm:ss')}">10/01/2005 10:04:01</span></p>-->
-
+            
             <a class="btn btn-secondary" th:href="@{/post}">Voltar</a>
             
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+        <script type="text/javascript">
+            function addTag() {
+                const container = document.getElementById('tag-container');
+                const index = container.getElementsByClassName('tag-row').length;
+
+                const row = document.createElement('div');
+                row.className = 'input-group mb-3 tag-row';
+                row.innerHTML = `
+                    <input type="text" class="form-control"  aria-describedby="button-addon2" id="post.tags${index}.nome" name="post.tags[${index}].nome">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-danger" type="button" onclick="removeTag(this);" id="button-addon2">Remover</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            }
+
+            function removeTag(button) {
+                // Remove a div (task-row) que contém o botão clicado
+                button.closest('.tag-row').remove();
+
+                // Atualiza os índices de todos os itens restantes
+                reindexTags();
+            }
+
+            function reindexTags() {
+                const rows = document.querySelectorAll('.tag-row');
+
+                rows.forEach((row, index) => {
+                    const input = row.querySelector('input');
+                    input.name = `post.tags[${index}].nome`;
+                    input.id = `post.tags${index}.nome`;
+                });
+            }
+        </script>
     </body>
 </html>

@@ -9,6 +9,10 @@
     </head>
     <body>
         <section class="container">
+            
+            <div class="alert alert-success" role="alert" th:if="${msgSuccess}" th:text="${msgSuccess}">
+                A success alert!
+            </div>
 
             <h1 th:text="|Post #${post.id}|">Post #4</h1>
             <br>
@@ -27,8 +31,9 @@
             <ul class="list-group">
                 <li class="list-group-item" th:each="tag: ${post.tags}" th:text="${tag.nome}">Ação</li>
             </ul>
-
+            <br>
             <a class="btn btn-secondary"th:href="@{/post}">Voltar</a>
+            <a class="btn btn-primary" th:href="@{/post/{id}/edit(id=${post.id})}">Editar</a>
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     </body>

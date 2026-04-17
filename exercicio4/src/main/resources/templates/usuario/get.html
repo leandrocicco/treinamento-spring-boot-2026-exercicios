@@ -33,6 +33,10 @@
                 th:href="@{/usuario}">
                 Voltar
             </a>
+            <a class="btn btn-primary"
+                th:href="@{/usuario/{id}/edit(id=${usuario.id})}">
+                Editar
+            </a>
             
         </section>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>

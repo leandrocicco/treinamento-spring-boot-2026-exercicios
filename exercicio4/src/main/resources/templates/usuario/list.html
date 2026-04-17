@@ -9,6 +9,15 @@
     </head>
     <body>
         <section class="container">
+            
+            <div class="alert alert-danger" role="alert" th:if="${msgError}">
+                <p th:text="${msgError}"></p>
+            </div>
+            
+            <div class="alert alert-success" role="alert" th:if="${msgSuccess}">
+                <p th:text="${msgSuccess}"></p>
+            </div>
+            
             <table class="table">
                 
                 <thead>
@@ -29,14 +38,17 @@
                     <td th:text="|#${usuario.nome}|">Fulano</td>                    
                     <td th:text="|#${usuario.idade}|">34</td>                    
                     <td>
-                        <a class="btn btn-primary"
-                            th:href="@{/usuario/{id}(id=${usuario.id})}">
-                            Visualizar
-                        </a>
-                        <a class="btn btn-primary"
-                            th:href="@{/usuario/{id}/edit(id=${usuario.id})}">
-                            Editar
-                        </a>
+                        <form th:method="delete" th:action="@{/usuario/{id}(id=${usuario.id})}" action="#">
+                            <a class="btn btn-primary"
+                                th:href="@{/usuario/{id}(id=${usuario.id})}">
+                                Visualizar
+                            </a>
+                            <a class="btn btn-primary"
+                                th:href="@{/usuario/{id}/edit(id=${usuario.id})}">
+                                Editar
+                            </a>
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
                     </td>
                 </tr>
 

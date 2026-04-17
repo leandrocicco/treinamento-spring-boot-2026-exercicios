@@ -33,12 +33,17 @@ public class PostService {
 
         post = post.withDataPostagem(LocalDateTime.now());
 
-        final Set<ConstraintViolation<Post>> violations = validator.validate(post);
-        if (!violations.isEmpty()) {
-            throw new IllegalArgumentException("Objeto inválido: " + violations);
-        }
+//        final Set<ConstraintViolation<Post>> violations = validator.validate(post);
+//        if (!violations.isEmpty()) {
+//            throw new IllegalArgumentException("Objeto inválido: " + violations);
+//        }
     
         return postRepository.save(post);
+    }
+    
+    @Transactional
+    public void delete(Long id){
+        postRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)

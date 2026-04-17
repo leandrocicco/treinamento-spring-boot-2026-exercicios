@@ -11,7 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.ui.Model;
+import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -72,6 +73,21 @@ public class UsuarioController {
         redirectAttributes.addFlashAttribute("msgSuccess", "Usuário salvo com sucesso!");
         
         return "redirect:/usuario/"+usuarioSalvo.id();
+        
+    }
+    
+    @DeleteMapping("/{id}")
+    public String destroy(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes, @PageableDefault Pageable pageable) {
+        try {
+            usuarioService.delete(id);
+            redirectAttributes.addFlashAttribute("msgSuccess", "Usuário #"+id+" excluído com sucesso!");
+            return "redirect:/usuario";
+        }    
+        catch (DbActionExecutionException e) {
+            model.addAttribute("msgError", "O usuário #"+id+" tem posts associados e não pode ser excluído!");
+            model.addAttribute("usuarios", usuarioService.findAll(pageable));
+            return "usuario/list";
+        }
         
     }
 }
